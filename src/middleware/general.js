@@ -20,10 +20,10 @@ export const addBodyParser = app => {
 export const addJson = app => {
   app.use(json())
 }
-// 添加koa-static
+/* // 添加koa-static
 export const addKoaStatic = app => {
   app.use(require('koa-static')(`${__dirname}/public`))
-}
+} */
 // 添加日志
 export const addLogger = app => {
   app.use(async (ctx, next) => {
