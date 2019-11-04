@@ -33,8 +33,6 @@ class Crawler {
         console.log(leaderTeam)
         // RUNNER UP
         const runnerData = []
-
-        // eslint-disable-next-line array-callback-return
         it.find('.runner-up').map((j, obj) => {
           const ob = $(obj)
 
@@ -56,6 +54,7 @@ class Crawler {
             runnerRatio,
             runnerImgTrue
           })
+          return undefined
         })
         if (leaderName && leaderName != '') {
           data.push({
