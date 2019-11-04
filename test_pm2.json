@@ -1,0 +1,23 @@
+{
+  "apps": [
+    {
+      "name": "koa-server",
+      "script": "./build/server.js",
+      "watch": true,
+      "instances": 0,
+      "exec_mode": "cluster",
+      "ignore_watch": [
+        "node_modules",
+        "logs"
+      ],
+      "instance_var": "INSTANCE_ID",
+      "node_args": "--nouse_idle_notification --max-old-space-size=2048",
+      "log_file": "/log/pm2/log/pm2.log",
+      "out_file": "/log/pm2/out/out.log",
+      "err_file": "/log/pm2/err/err.log",
+      "env": {
+        "NODE_ENV": "development"
+      }
+    }
+  ]
+}
