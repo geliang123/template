@@ -24,14 +24,6 @@ export const addJson = app => {
 export const addKoaStatic = app => {
   app.use(require('koa-static')(`${__dirname}/public`))
 }
-// 添加views
-/* export const addViews = app => {
-  app.use(
-    views("../views", {
-      extension: "pug"
-    })
-  )
-} */
 // 添加日志
 export const addLogger = app => {
   app.use(async (ctx, next) => {

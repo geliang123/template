@@ -1,21 +1,19 @@
-/* eslint-disable no-shadow */
 import { join } from 'path'
 import R from 'ramda'
+import Koa from 'koa'
 import Logger from './utils/logger'
-
-const Koa = require('koa')
 
 const onerror = require('koa-onerror')
 
 const app = new Koa()
 global.logger = Logger(process.env.LOG_DIR)
 onerror(app)
-
+// 中间件数组
 const MIDDLEWARES = ['general', 'router']
-const useMiddlewares = app => {
+const useMiddlewares = server => {
   R.map(
     R.compose(
-      R.forEachObjIndexed(e => e(app)),
+      R.forEachObjIndexed(e => e(server)),
       require,
       name => join(__dirname, `./middleware/${name}`)
     )
@@ -23,7 +21,6 @@ const useMiddlewares = app => {
 }
 
 async function start() {
-  // eslint-disable-next-line react-hooks/rules-of-hooks
   await useMiddlewares(app)
 }
 start()

@@ -15,7 +15,7 @@
     "dev": "cross-env NODE_ENV=development ./node_modules/.bin/nodemon src/server.js --exec babel-node",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "lyxcool",
+  "author": "",
   "dependencies": {
     "axios": "^0.18.0",
     "chalk": "^2.3.0",
