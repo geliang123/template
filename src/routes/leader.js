@@ -11,6 +11,7 @@ export default class LeaderBoardsRouter {
     ctx.body = obj
   }
 }
+// 设置定时任务
 const callback = () => {
   Crawler.getLeaderboards()
 }

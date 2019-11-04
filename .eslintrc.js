@@ -61,6 +61,7 @@ module.exports = {
     ], // 允许在for循环的最后一个表达式使用++ --
     'no-undef': [1], // 允许使用未声明变量
     eqeqeq: [0], // 允许使用==
+    'array-callback-return': ['error', { allowImplicit: false }],
     'object-curly-newline': [0], // 不检测解构多个分行
     'prefer-destructuring': [0], // 数组和对象解构
     'quote-props': [0], // 不检测键的引号

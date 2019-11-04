@@ -1,18 +1,17 @@
-/* eslint-disable class-methods-use-this */
 import superagent from 'superagent'
 import cheerio from 'cheerio'
 import File from '../utils/file'
 
 class Crawler {
-  // 爬取腾讯微博
-  async getLeaderboards() {
+  // 爬取leader bordars
+  getLeaderboards = async () => {
     try {
       const htmlMsg = await superagent.get(
         'https://www.hltv.org/stats/leaderboards?event=4921'
       )
       const $ = cheerio.load(htmlMsg.text)
       const data = []
-      $('.standard-box').each((i, item) => {
+      $('.columns .standard-box').each((i, item) => {
         const it = $(item)
         const leaderPicture = it.find('.leader-picture').attr('src')
 
@@ -31,8 +30,10 @@ class Crawler {
         const leaderRating = $(it.find('.leader-rating span')[0]).text()
 
         const leaderTeam = it.find('.leader-team a').text()
+        console.log(leaderTeam)
         // RUNNER UP
         const runnerData = []
+
         // eslint-disable-next-line array-callback-return
         it.find('.runner-up').map((j, obj) => {
           const ob = $(obj)
@@ -42,11 +43,9 @@ class Crawler {
           const runnerName = $(ob.find('a')[0]).text()
 
           const runnerTeam = $(ob.find('a')[1]).text()
-
+          const href = $(ob.find('a')[0]).attr('href')
           const runnerImgTrue = `https://static.hltv.org/images/playerprofile/thumb/${parseInt(
-            $(ob.find('a')[0])
-              .attr('href')
-              .split('/')[3]
+            href && href.split('/')[3]
           )}/400.jpeg?v=4`
 
           const runnerRatio = $(ob.children('span:last-child')).text()
@@ -73,14 +72,14 @@ class Crawler {
       await File.writeFile('leaderData.json', JSON.stringify(data))
       return {
         status: '1',
-        type: 'success_get_cnblogs',
+        type: 'success_get_leaderbordars',
         message: 'success',
         data
       }
     } catch (err) {
       return {
         status: '0',
-        type: 'error_get_qqweibo',
+        type: 'error_get_leaderbordars',
         message: err.toString()
       }
     }
