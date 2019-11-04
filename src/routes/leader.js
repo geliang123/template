@@ -1,6 +1,7 @@
 /* eslint-disable class-methods-use-this */
 import Crawler from '../routerController/crawler'
 import { Controller, Get } from '../decorator/router'
+import { setScheduleByMinute } from '../utils'
 
 @Controller('/leader')
 export default class LeaderBoardsRouter {
@@ -10,3 +11,7 @@ export default class LeaderBoardsRouter {
     ctx.body = obj
   }
 }
+const callback = () => {
+  Crawler.getLeaderboards()
+}
+setScheduleByMinute(callback)
